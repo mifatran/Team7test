@@ -53,6 +53,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedB", true);
+              console.log(obj.first_name);
               localStorage.setItem("nameB", obj.first_name);
               navigate("/BusinessAnalyst");
               break;
@@ -73,6 +74,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedM", true);
+              console.log(obj.first_name);
               localStorage.setItem("nameM", obj.first_name);
               navigate("/Maintenance");
               break;
@@ -94,6 +96,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedV", true);
+              console.log(obj.first_name);
               localStorage.setItem("nameV", obj.first_name);
               navigate("/Visitorpage");
               break;
