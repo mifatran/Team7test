@@ -113,10 +113,6 @@ function Signin() {
           <Link to='/'>DB Theme Park</Link>
         </li>
         <li className="nav-item">About</li>
-        <li className="nav-item" id='signup'>
-            {/* Endpoint to route to Signup component */} 
-            <Link to="/Signup">Sign up</Link> 
-        </li>
         <li className="nav-item">Contact</li>
       </ul>
 
