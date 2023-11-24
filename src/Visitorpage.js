@@ -119,8 +119,28 @@ function Visitorpage() {
 
   const signOut = () => {
     localStorage.removeItem("authenticatedV");
+    localStorage.removeItem("nameV");
     navigate("/"); //Navigate back to main page
   };
+
+  function GetVisitorObj() {
+    for (const obj of userInfo) {
+      if (obj.first_name == localStorage.getItem("nameV")) {
+        return (
+          <tr key={obj.customer_id}>
+            <td>{obj.user_tag}</td>
+            <td>{obj.first_name}</td>
+            <td>{obj.last_name}</td>
+            <td>{obj.user_pass}</td>
+            <td>{obj.email}</td>
+            <td>{obj.phone_number}</td>
+            <td>{obj.home_address}</td>               
+            <td>{obj.payment_method}</td>
+          </tr>
+        );
+      }
+    }
+  }
 
   if (localStorage.getItem("authenticatedV") == false || localStorage.getItem("authenticatedV") == null) {
     console.log("Unsuccessful login");
@@ -140,7 +160,7 @@ function Visitorpage() {
       </ul>
 
         <div className="welcome-back-visitor">
-          Welcome back, visitor!
+          Welcome back, {localStorage.getItem("nameV")}!
         </div>
         
     
@@ -187,19 +207,7 @@ function Visitorpage() {
                     </thead>
 
                     <tbody>
-                      {userInfo.map((customer) => (
-                        <tr key={customer.id}>
-                          <td>{customer.user_tag}</td>
-                          <td>{customer.first_name}</td>
-                          <td>{customer.last_name}</td>
-                          <td>{customer.user_pass}</td>
-                          <td>{customer.email}</td>
-                          <td>{customer.phone_number}</td>
-                          <td>{customer.home_address}</td>               
-                          <td>{customer.payment_method}</td>
-                        </tr>
-                      ))}
-
+                      <GetVisitorObj />
                     </tbody>
 
                   </table>

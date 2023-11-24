@@ -181,8 +181,49 @@ function Maintenance() {
 
   const signOut = () => {
     localStorage.removeItem("authenticatedM");
+    localStorage.removeItem("nameM");
     navigate("/"); //Navigate back to main page
   };
+
+  function GetEmpObj() {
+    for (const obj of StaffData) {
+      if (obj.first_name == localStorage.getItem("nameM")) {
+        return (
+          <tr key={obj.employee_id}>
+          <td>{obj.first_name}</td>
+          <td>{obj.last_name}</td>
+          <td>{obj.user_tag}</td>
+          <td>{obj.user_pass}</td>
+          <td>{obj.email}</td>
+          <td>{obj.home_address}</td>
+          </tr>
+        );
+      }
+    }
+  }
+
+  function GetEmpID() {
+    for (const obj of StaffData) {
+      if (obj.first_name == localStorage.getItem("nameM")) {
+        return (
+          <h3>Employee ID: {obj.employee_id}</h3>
+        );
+      }
+    }
+  }
+
+  function GetEmpWage() {
+    for (const obj of StaffData) {
+      if (obj.first_name == localStorage.getItem("nameM")) {
+        return (
+          <tr key={obj.employee_id}>
+          <td>{obj.hourly_pay}</td>
+          <td>{obj.salary}</td>
+          </tr>
+        );
+      }
+    }
+  }
   
   if (localStorage.getItem("authenticatedM") == false || localStorage.getItem("authenticatedM") == null) {
     console.log("Unsuccessful login");
@@ -202,7 +243,7 @@ function Maintenance() {
       </ul>
       {StaffData.map((employee) => (
         <div className="welcome-back-employee" key={employee.id}>
-          Welcome back, {employee.first_name} {employee.last_name}!
+          Welcome back, {localStorage.getItem("nameM")}!
         </div>
         ))}
         <div className="visitortype">
@@ -239,10 +280,7 @@ function Maintenance() {
             <div style={{ display: visible === 'section1' ? 'block' : 'none' }}>
               <div className="optiontextbox">
                 <h2>Your Account Information</h2>
-                {StaffData.map((employee) => (
-                <h3 key={employee.id}>Employee ID: {employee.employee_id}
-                </h3>
-                ))}
+                  <GetEmpID />
                   <div class = "Account-Info">
                   <table>
                       <thead>
@@ -256,16 +294,7 @@ function Maintenance() {
                       </tr>
                       </thead>
                       <tbody>
-                      {StaffData.map((employee) => (
-                        <tr key={employee.id}>
-                        <td>{employee.first_name}</td>
-                        <td>{employee.last_name}</td>
-                        <td>{employee.user_tag}</td>
-                        <td>{employee.user_pass}</td>
-                        <td>{employee.email}</td>
-                        <td>{employee.home_address}</td>
-                        </tr>
-                      ))}
+                        <GetEmpObj />
                       </tbody>
                   </table>
                   
@@ -300,12 +329,7 @@ function Maintenance() {
                       </tr>
                       </thead>
                       <tbody>
-                      {StaffData.map((employee) => (
-                        <tr key={employee.id}>
-                        <td>{employee.hourly_pay}</td>
-                        <td>{employee.salary}</td>
-                        </tr>
-                      ))}
+                        <GetEmpWage />
                       </tbody>
                       </table>
                       <p><b>You can not change your hourly wage!</b></p>

@@ -53,6 +53,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedB", true);
+              localStorage.setItem("nameB", obj.first_name);
               navigate("/BusinessAnalyst");
               break;
             }
@@ -72,6 +73,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedM", true);
+              localStorage.setItem("nameM", obj.first_name);
               navigate("/Maintenance");
               break;
             }
@@ -92,6 +94,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedV", true);
+              localStorage.setItem("nameV", obj.first_name);
               navigate("/Visitorpage");
               break;
             }
@@ -102,7 +105,7 @@ function Signin() {
         }
       }
     };
-    console.log(EmployeeData);
+    console.log(CustomerData);
     return (
     <div className="Signin">
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>
@@ -113,6 +116,10 @@ function Signin() {
           <Link to='/'>DB Theme Park</Link>
         </li>
         <li className="nav-item">About</li>
+        <li className="nav-item" id='signup'>
+            {/* Endpoint to route to Signup component */} 
+            <Link to="/Signup">Sign up</Link> 
+        </li>
         <li className="nav-item">Contact</li>
       </ul>
 
