@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Example</title>
+</head>
+<body>
+  <h1>Select Options Form</h1>
+  
+  <form action="/submit-form" method="post"> <!-- Replace "/submit-form" with your form submission endpoint -->
+    <label for="selectOption">Select an Option:</label><br>
+    <select id="selectOption" name="option">
+      <option value="">Select an option</option>
+      <option value="Costumer info">Costumer info</option>
+      <option value="Business info">Business info</option>
+      <option value="Option 3">Option 3</option>
+    </select><br><br>
+    
+    <label for="inputText">Enter Text:</label><br>
+    <input type="text" id="inputText" name="text"><br><br>
+    
+    <label for="checkbox">Check the box:</label>
+    <input type="checkbox" id="checkbox" name="check"><br><br>
+    
+    <label for="radioOption1">Choose an option:</label><br>
+    <input type="radio" id="radioOption1" name="radioOption" value="optionA">
+    <label for="radioOption1">Option A</label><br>
+    <input type="radio" id="radioOption2" name="radioOption" value="optionB">
+    <label for="radioOption2">Option B</label><br><br>
+    
+    <input type="submit" value="Submit">
+  </form>
+  <script src="BusinessAnalyst.js"></script>
+</body>
+</html>
+
+

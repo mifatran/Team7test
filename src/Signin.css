@@ -1,0 +1,97 @@
+.Signin {
+  height: 100vh;
+}
+
+.nav-headers {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(191, 26, 47, 1);
+  letter-spacing: 1px;
+}
+
+.nav-headers li:first-child {
+  float: left;
+  font-family: 'Jomhuria', sans-serif;
+  font-size: 40px;
+
+}
+#mainpg *, #signup *{
+  color: white;
+}
+
+.nav-item {
+  font-family: 'Mitr', serif;
+  float: right;
+  display: block;
+  color: white;
+  text-align: center;
+  font-family: 'Mitr', serif;
+  font-weight: 600;
+  font-size: 20px;
+  /*font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;*/
+}
+
+.signin-body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://images.pexels.com/photos/1194723/pexels-photo-1194723.jpeg);
+}
+
+.signin-form {
+  width: 400px;
+  background-color: rgba(236, 175, 40, 0.96);
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.0);
+  padding: 50px 35px;
+  margin: 20px;
+}
+
+.signin-form *{
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+
+.signin-form h3{
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+
+label{
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#username, #password{
+  display: block;
+  height: 50px;
+  width: 100%;
+  color: rgba(9, 9, 9, 0.8);
+  background-color: rgba(255, 255, 255, 0.925);
+  border-radius: 10px;
+  padding: 0px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+  text-indent: 5px;
+}
+
+.login-button{
+  margin-top: 50px;
+  width: 100%;
+  background-color: rgba(189, 88, 79, 1);
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}

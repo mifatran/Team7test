@@ -1,0 +1,234 @@
+.headers li:first-child{
+  float: left;
+}
+
+.headers{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(191, 26, 47, 1);
+}
+
+.header_item{
+  font-family: 'Jomhuria', sans-serif;
+  float: right;
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  font-size: 40px;
+  letter-spacing: 1px;
+}
+
+#sign_up *, #sign_in *, #business_analytics *{
+  color: white;
+  font-family: 'Mitr', serif;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.welcome{
+  text-align: center;
+}
+
+.welcome_line{
+  color: #000000;
+  font-family: 'Jomhuria', serif;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.img_outer{
+  text-align: center;
+  overflow: hidden;
+}
+
+.image{
+  width: 1400px;
+  height: 600px;
+  margin-bottom: -100px;
+}
+
+.slogan{
+  margin-left: 230px;
+  color: #000000;
+  font-family: 'Jomhuria', serif;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.startyear{
+  margin-left: 230px;
+  color: #000000;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 25px;
+  margin-top: -80px;
+}
+
+.park_info{
+  margin-left: 230px;
+  color: #000000;
+  font-family: 'Jomhuria', serif;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.event{
+  margin-left: 250px;
+}
+
+.events{
+  color: #000000;
+  font-family: 'Mitr', serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.event_invt{
+  margin-bottom: -8px;
+  color: #000000;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.event_table {
+  margin-left: 250px;
+  margin-top: 40px ;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+}
+
+.ticket{
+  margin-left: 250px;
+}
+
+.tickets{
+  color: #000000;
+  font-family: 'Mitr', serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.ticket_info{
+  margin-bottom: -8px;
+  color: #000000;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.ticket_table{
+  margin-left: 250px;
+  margin-top: 40px ;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  width: 300px;
+}
+
+.theme_zone{
+  margin-left: 250px;
+  color: #000000;
+  font-family: 'Mitr', serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.optionzone{
+  text-align: center;
+}
+
+.springzone{
+  font-family:'Josefin Sans', sans-serif;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: rgb(235, 221, 100);
+  margin: 0 30px 0 30px;
+}
+
+.summerzone{
+  font-family:'Josefin Sans', sans-serif;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: rgb(165, 228, 123);
+  margin: 0 30px 0 30px;
+}
+
+.fallzone{
+  font-family:'Josefin Sans', sans-serif;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: rgb(235, 81, 81);
+  margin: 0 30px 0 30px;
+}
+
+.winterzone{
+  font-family:'Josefin Sans', sans-serif;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: rgb(118, 195, 218);
+  margin: 0 30px 0 30px;
+}
+
+
+.entity{
+  font-family:'Josefin Sans', sans-serif;
+}
+
+.ride_table{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+}
+
+.food_table{
+  margin-top: 40px ;
+  margin-bottom: 40px;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  width: 700px;
+}
+
+.shop_table{
+  margin-top: 40px ;
+  margin-bottom: 40px;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  width: 500px;
+}
+
+.amenities_table{
+  margin-top: 40px ;
+  margin-bottom: 40px;
+  background: #d9d9d9;
+  border: 1px solid black;
+  text-align: center;
+  font-family:'Josefin Sans', sans-serif;
+  font-size: 20px;
+  width: 1000px;
+}
