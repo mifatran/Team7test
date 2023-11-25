@@ -53,8 +53,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedB", true);
-              console.log(obj.first_name);
-              localStorage.setItem("nameB", obj.first_name);
+              localStorage.setItem("idB", obj.employee_id);
               navigate("/BusinessAnalyst");
               break;
             }
@@ -74,8 +73,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedM", true);
-              console.log(obj.first_name);
-              localStorage.setItem("nameM", obj.first_name);
+              localStorage.setItem("idM", obj.employee_id);
               navigate("/Maintenance");
               break;
             }
@@ -96,8 +94,7 @@ function Signin() {
               console.log("Login successful");
               setauthenticated(true);
               localStorage.setItem("authenticatedV", true);
-              console.log(obj.first_name);
-              localStorage.setItem("nameV", obj.first_name);
+              localStorage.setItem("idV", obj.customer_id);
               navigate("/Visitorpage");
               break;
             }
@@ -108,7 +105,7 @@ function Signin() {
         }
       }
     };
-    console.log(CustomerData);
+    //console.log(CustomerData);
     return (
     <div className="Signin">
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>
