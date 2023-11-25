@@ -77,11 +77,11 @@
   letter-spacing: 1px;
 }
 
-.event{
+.section{
   margin-left: 250px;
 }
 
-.events{
+.title{
   color: #000000;
   font-family: 'Mitr', serif;
   font-size: 25px;
@@ -89,7 +89,7 @@
   letter-spacing: 1px;
 }
 
-.event_invt{
+.info{
   margin-bottom: -8px;
   color: #000000;
   font-family:'Josefin Sans', sans-serif;
@@ -106,10 +106,6 @@
   text-align: center;
   font-family:'Josefin Sans', sans-serif;
   font-size: 20px;
-}
-
-.ticket{
-  margin-left: 250px;
 }
 
 .tickets{
@@ -140,14 +136,6 @@
   width: 300px;
 }
 
-.theme_zone{
-  margin-left: 250px;
-  color: #000000;
-  font-family: 'Mitr', serif;
-  font-size: 30px;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
 
 .optionzone{
   text-align: center;
@@ -188,6 +176,7 @@
 
 .entity{
   font-family:'Josefin Sans', sans-serif;
+  font-size: 30px;
 }
 
 .ride_table{
