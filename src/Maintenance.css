@@ -102,19 +102,7 @@
   width: 168px;
 }
 
-.RideInfoButton {
-  color: #000000;
-  font-size: 20px;
-  left: 15px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 80px;
-  width: 168px;
-}
-
-
-.RideBreakdowns{
+.ZoneInfoButton{
   color: #000000;
   font-size: 20px;
   left: 15px;
@@ -158,6 +146,16 @@
   width: 168px;
 }
 
+.InjuryReport{
+  color: #000000;
+  font-size: 20px;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 480px;
+  width: 168px;
+}
 
 button {
   background-color: rgba(255, 255, 255, 0);
