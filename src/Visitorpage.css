@@ -126,6 +126,17 @@
   top: 220px;
   width: 168px;
 }
+
+.InboxButton {
+  color: #000000;
+  font-size: 20px;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 300px;
+  width: 168px;
+}
 .DeleteAccButtonConfirm {
   background-color: rgba(255, 255, 255, 0);
   border-radius: 5px;
@@ -146,7 +157,7 @@
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: 300px;
+  top: 350px;
   width: 168px;
 }
 
@@ -266,4 +277,12 @@ input{
 
 #AccountDeleteButton:hover{
   background-color: #580808;
+}
+
+#AccDeleteSignout{
+  background-color: #bd1515;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
