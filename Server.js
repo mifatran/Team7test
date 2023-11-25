@@ -775,6 +775,410 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+else if (req.url === '/api/all' && req.method === 'GET') {
+      try {
+    
+        await sql.connect(config);
+      
+      const zone1 = await sql.query("\
+      SELECT * \
+      FROM theme_zone \
+      WHERE Zone_code = 'ZONE0001';\
+      ");
+
+      const zone2 = await sql.query("\
+      SELECT * \
+      FROM theme_zone \
+      WHERE Zone_code = 'ZONE0002';\
+      ");
+
+      const zone3 = await sql.query("\
+      SELECT * \
+      FROM theme_zone \
+      WHERE Zone_code = 'ZONE0003';\
+      ");
+
+      const zone4 = await sql.query("\
+      SELECT * \
+      FROM theme_zone \
+      WHERE Zone_code = 'ZONE0004';\
+      ");
+
+      const event = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Status = 'Active';\
+      ");
+
+      const inactiveevent = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Status = 'Inactive';\
+      ");
+    
+      const event1 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Active';\
+      ");
+    
+      const event2 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Active';\
+      ");
+    
+      const event3 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Active';\
+      ");
+    
+      const event4 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Active';\
+      ");
+    
+      const inactiveevent1 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveevent2 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveevent3 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveevent4 = await sql.query("\
+      SELECT * \
+      FROM special_events \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Inactive';\
+      ");
+    
+      const ticket = await sql.query("SELECT TicketType, Prices FROM tickets GROUP BY Prices, TicketType");
+    
+        const ride1 = await sql.query("\
+        SELECT * \
+        FROM ride_info \
+        WHERE Zone_code = 'ZONE0001' AND OperationStatus = 'Active';\
+      ");
+    
+      const ride2 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0002' AND OperationStatus = 'Active';\
+    ");
+    
+      const ride3 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0003' AND OperationStatus = 'Active';\
+      ");
+    
+      const ride4 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0004' AND OperationStatus = 'Active';\
+      ");
+      
+      const inactiveride = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE OperationStatus = 'Inactive';\
+      ");
+
+      const inactiveride1 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0001' AND OperationStatus = 'Inactive';\
+      ");
+    
+      const inactiveride2 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0002' AND OperationStatus = 'Inactive';\
+      ");
+    
+      const inactiveride3 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0003' AND OperationStatus = 'Inactive';\
+      ");
+    
+      const inactiveride4 = await sql.query("\
+      SELECT * \
+      FROM ride_info \
+      WHERE Zone_code = 'ZONE0004' AND OperationStatus = 'Inactive';\
+      ");
+    
+      const stall1 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Active';\
+      ");
+    
+      const stall2 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Active';\
+      ");
+    
+      const stall3 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Active';\
+      ");
+    
+      const stall4 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Active';\
+      ");
+    
+      const inactivestall1 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Inactive';\
+      ");
+    
+      const inactivestall2 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Inactive';\
+      ");
+    
+      const inactivestall3 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Inactive';\
+      ");
+    
+      const inactivestall4 = await sql.query("\
+      SELECT * \
+      FROM food_stalls \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Inactive';\
+      ");
+    
+      const shop1 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Active';\
+      ");
+    
+      const shop2 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Active';\
+      ");
+    
+      const shop3 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Active';\
+      ");
+    
+      const shop4 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Active';\
+      ");
+    
+      const inactiveshop1 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveshop2 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveshop3 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveshop4 = await sql.query("\
+      SELECT * \
+      FROM Merchandise \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Inactive';\
+      ");
+    
+      const service1 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Active';\
+      ");
+    
+      const service2 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Active';\
+      ");
+    
+      const service3 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Active';\
+      ");
+    
+      const service4 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Active';\
+      ");
+    
+      const inactiveservice1 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0001' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveservice2 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0002' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveservice3 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0003' AND Status = 'Inactive';\
+      ");
+    
+      const inactiveservice4 = await sql.query("\
+      SELECT * \
+      FROM amenities_and_service \
+      WHERE Zone_code = 'ZONE0004' AND Status = 'Inactive';\
+      ");
+
+      const helpdesk = await sql.query("\
+      SELECT * \
+      FROM help_desk; \
+      ");
+
+      const security = await sql.query("\
+      SELECT * \
+      FROM security; \
+      ");
+
+      const emergency = await sql.query("\
+      SELECT * \
+      FROM emergency; \
+      ");
+
+      const injurycase = await sql.query("\
+      SELECT * \
+      FROM injury_case; \
+      ");
+
+      const maintenancestaff = await sql.query("SELECT * FROM employee");
+
+      const monthlybreakdowns = await sql.query("SELECT MONTH(DateStart)AS MONTH, YEAR(DateStart) AS YEAR, COUNT(IssueRideID) AS BROKE_DOWN_RIDES FROM issue_log GROUP BY MONTH(DateStart), YEAR(DateStart)");
+
+      const injuryreport = await sql.query(`
+      SELECT 
+        ride_info.RideName,
+        DATEPART(YEAR, injury_case.[Date]) AS [Year],
+        DATEPART(MONTH, injury_case.[Date]) AS [Month],
+        DATEPART(WEEK, injury_case.[Date]) AS [Week],
+        AVG(injury_case.AmountInjured) AS AvgInjured,
+        COUNT(issue_log.issueRideID) AS Breakdowns
+      FROM 
+        injury_case
+      LEFT JOIN issue_log ON injury_case.RideID = issue_log.IssueRideID
+      LEFT JOIN ride_info ON injury_case.RideID = ride_info.RideID
+      GROUP BY 
+        ride_info.RideName,
+        DATEPART(YEAR, injury_case.[Date]),
+        DATEPART(MONTH, injury_case.[Date]),
+        DATEPART(WEEK, injury_case.[Date])
+      ORDER BY 
+        [Year], [Month], [Week], ride_info.RideName;
+    `);
+       
+       const responseData = {
+        Zone1Data: zone1.recordset,
+        Zone2Data: zone2.recordset,
+        Zone3Data: zone3.recordset,
+        Zone4Data: zone4.recordset,
+        TicketData: ticket.recordset,
+        EventData: event.recordset,
+        Event1Data: event1.recordset,
+        Event2Data: event2.recordset,
+        Event3Data: event3.recordset,
+        Event4Data: event4.recordset,
+        InactiveEventData: inactiveevent.recordset,
+        InactiveEvent1Data: inactiveevent1.recordset,
+        InactiveEvent2Data: inactiveevent2.recordset,
+        InactiveEvent3Data: inactiveevent3.recordset,
+        InactiveEvent4Data: inactiveevent4.recordset,
+        Ride1Data: ride1.recordset,
+        Ride2Data: ride2.recordset,
+        Ride3Data: ride3.recordset,
+        Ride4Data: ride4.recordset,
+        InactiveRideData: inactiveride.recordset,
+        InactiveRide1Data: inactiveride1.recordset,
+        InactiveRide2Data: inactiveride2.recordset,
+        InactiveRide3Data: inactiveride3.recordset,
+        InactiveRide4Data: inactiveride4.recordset,
+        Stall1Data: stall1.recordset,
+        Stall2Data: stall2.recordset,
+        Stall3Data: stall3.recordset,
+        Stall4Data: stall4.recordset,
+        InactiveStall1Data: inactivestall1.recordset,
+        InactiveStall2Data: inactivestall2.recordset,
+        InactiveStall3Data: inactivestall3.recordset,
+        InactiveStall4Data: inactivestall4.recordset,
+        Shop1Data: shop1.recordset,
+        Shop2Data: shop2.recordset,
+        Shop3Data: shop3.recordset,
+        Shop4Data: shop4.recordset,
+        InactiveShop1Data: inactiveshop1.recordset,
+        InactiveShop2Data: inactiveshop2.recordset,
+        InactiveShop3Data: inactiveshop3.recordset,
+        InactiveShop4Data: inactiveshop4.recordset,
+        Service1Data: service1.recordset,
+        Service2Data: service2.recordset,
+        Service3Data: service3.recordset,
+        Service4Data: service4.recordset,
+        InactiveService1Data: inactiveservice1.recordset,
+        InactiveService2Data: inactiveservice2.recordset,
+        InactiveService3Data: inactiveservice3.recordset,
+        InactiveService4Data: inactiveservice4.recordset,
+        InjuryReportData: injuryreport.recordset,
+        BreakdownData: monthlybreakdowns.recordset,
+        StaffData: maintenancestaff.recordset,
+        HelpDeskData: helpdesk.recordset,
+        SecurityData: security.recordset,
+        EmergencyData: emergency.recordset,
+        InjuryCaseData: injurycase.recordset
+      };
+    
+    
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify(responseData));
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        return res.end('Internal Server Error');
+      } finally {
+     
+        //await sql.close();
+      }
+    }
   else {
     // Serve static files for React app
     serveStaticFile(req, res);
