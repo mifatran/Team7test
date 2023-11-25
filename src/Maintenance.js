@@ -67,6 +67,7 @@ function Maintenance() {
   const[Event4Data, setEvent4Data] = useState([]);
   const[InjuryReportData, setInjuryReportData] = useState([]);
   const[BreakdownData, setBreakdownData] = useState([]);
+  const[InjuryCaseData, setInjuryCaseData] = useState([]);
   useEffect(() => {
     
     fetch('/api/all')
@@ -123,11 +124,13 @@ function Maintenance() {
         setInactiveEvent4Data(data.InactiveEvent4Data);
         setInjuryReportData(data.InjuryReportData);
         setBreakdownData(data.BreakdownData);
-        setStaffData(data.StaffData)
+        setStaffData(data.StaffData);
+        setInjuryCaseData(data.InjuryCaseData)
 
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
+
   const handleupdateemppass = async (event) => {
     event.preventDefault();
 
@@ -148,11 +151,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Password Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleaddeventinfo = async (event) => {
@@ -175,11 +180,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Add New Event Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleaddrideinfo = async (event) => {
@@ -202,11 +209,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Add New Ride Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleaddstallinfo = async (event) => {
@@ -229,11 +238,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Add New Restaurant Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleaddshopinfo = async (event) => {
@@ -256,11 +267,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Add New Shop Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleaddserviceinfo = async (event) => {
@@ -283,11 +296,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Add New Service Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleupdateeventinfo = async (event) => {
@@ -310,11 +325,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Event Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleupdaterideinfo = async (event) => {
@@ -337,11 +354,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Event Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleupdatestallinfo = async (event) => {
@@ -364,11 +383,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Restaurant Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleupdateshopinfo = async (event) => {
@@ -391,11 +412,13 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Shop Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
   const handleupdateserviceinfo = async (event) => {
@@ -418,50 +441,83 @@ function Maintenance() {
       }
   
       const result = await response.json();
+      alert("Update Service Successfully!")
       console.log(result); 
       form.reset();
 
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
     }
   };
 
-// const [IssueLog1Data, setIssueLog1Data] = useState([]);
+  const handlenewinjury = async (event) => {
+    event.preventDefault();
 
-// const handledateissuelog = async (event) => {
-//   try {
-//   event.preventDefault(); // Prevent the default form submission behavior
+    const form = event.target;
+    const formData = new FormData(form);
+  
+    try {
+      const response = await fetch('/api/handlenewinjury', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      alert("Add New Case Successfully!")
+      console.log(result); 
+      form.reset();
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert("Something went wrong! Please try again!")
+    }
+  };
+
+const [IssueLog1Data, setIssueLog1Data] = useState([]);
+
+const handledateissuelog = async (event) => {
+  try {
+  event.preventDefault(); // Prevent the default form submission behavior
 
   
-//     const dateStartInput = document.getElementById('DateStart');
-//     const dateFixedInput = document.getElementById('DateFixed');
+    const dateStartInput = document.getElementById('DateStart');
+    const dateFixedInput = document.getElementById('DateFixed');
 
-//     const dateStartValue = dateStartInput.value;
-//     const dateFixedValue = dateFixedInput.value;
+    const DateStart = dateStartInput.value;
+    const DateFixed = dateFixedInput.value;
 
-//     const apiUrl = `/api/handledateissuelog?DateStart=${dateStartValue}&DateFixed=${dateFixedValue}`;
+    const apiUrl = `/api/handledateissuelog?DateStart=${DateStart}&DateFixed=${DateFixed}`;
 
-//     const response = await fetch(apiUrl, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json', // You can remove this line for GET requests
-//       },
-//     });
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json', // You can remove this line for GET requests
+      },
+    });
 
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-//     const result = await response.json();
-//     setIssueLog1Data(result);
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//   }
-// };
+    const result = await response.json();
+    setIssueLog1Data(result);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    alert("Something went wrong! Please try again!")
+  }
+};
 
-// useEffect(() => {
-//   handledateissuelog();
-// }, []);
+useEffect(() => {
+  handledateissuelog();
+}, []);
 
 
 const navigate = useNavigate();
@@ -474,7 +530,7 @@ const signOut = () => {
 
 function GetEmpObj() {
   for (const obj of StaffData) {
-    if (obj.first_name == localStorage.getItem("nameM")) {
+    if (obj.first_name === localStorage.getItem("nameM")) {
       return (
           <div key={obj.employee_id}>
             <h3>
@@ -513,7 +569,7 @@ function GetEmpObj() {
 }
 
 
-if (localStorage.getItem("authenticatedM") == false || localStorage.getItem("authenticatedM") == null) {
+if (localStorage.getItem("authenticatedM") === false || localStorage.getItem("authenticatedM") == null) {
   console.log("Unsuccessful login");
   return <Navigate replace to={navigate(-1)} />;
 }
@@ -552,7 +608,7 @@ else{
               <button className="HazardRep"onClick={() => showSection('section2')}>
                 Issue Log / Ride Breakdowns
               </button>
-              <button className="RideBreakdowns"onClick={() => showSection('section3')}>
+              <button className="ZoneInfoButton"onClick={() => showSection('section3')}>
                 Zone Information
               </button>
               <button className="AddRide"onClick={() => showSection('section4')}>
@@ -560,6 +616,9 @@ else{
               </button>
               <button className="UpdateRide"onClick={() => showSection('section5')}>
                 Update Zone Information
+              </button>
+              <button className="InjuryReport"onClick={() => showSection('section6')}>
+                Injury Case
               </button>
             
             </div>
@@ -607,7 +666,7 @@ else{
             <div style={{ display: visible === 'section2' ? 'block' : 'none' }}>
               <div className="optiontextbox">
                 <h2>Issue Log</h2>
-                {/* <form id="UpdateAccPas" onSubmit={handledateissuelog}  method="get" action="/submit">
+                <form id="UpdateAccPas" onSubmit={handledateissuelog}  method="get" action="/submit">
                   <p>
                     <label htmlFor="DateStart">Date Start: </label>
                     <input
@@ -626,13 +685,13 @@ else{
                     />
                   </p>
                   <p>
-                    <button id="UpdateAccButton" type="submit">Submit</button>
+                    <button id="UpdateAccButton" type="submit"> Submit</button>
                   </p>
-                </form> */}
+                </form>
                 <h3>Ride Breakdowns, Safety Inspection, Refurbishing</h3>
 
                 <p> All information of all issue logs have been reported</p>
-                {/* <table>
+                <table>
                       <thead>
                       <tr>
                         <th>Log ID </th>
@@ -646,7 +705,7 @@ else{
                       </tr>
                       </thead>
                       <tbody>
-                      {IssueLogData.map((issue_log) => (
+                      {IssueLog1Data.map((issue_log) => (
                         <tr key={issue_log.id}>
                         <td>{issue_log.LogIssueID}</td>
                         <td>{issue_log.IssueRideID}</td>
@@ -659,7 +718,7 @@ else{
                         </tr>
                       ))}
                       </tbody>
-                </table> */}
+                </table>
                 
                 <h3>Monthly Ride Breakdowns</h3>
                 <table class = "Services" id = "ServiceInfo">
@@ -1969,6 +2028,127 @@ else{
                       </div>
                  </div>
               </div>
+              <div style={{ display: visible === 'section6' ? 'block' : 'none' }}>
+              <div className="optiontextbox">
+                <h2>Injury Cases</h2>
+                <form id="UpdateAccPas" method="get" action="/submit">
+                  <p>
+                    <label for="FromDate">From: </label>
+                    <input
+                      type="date"
+                      id="FromDate"
+                      name="FromDate"
+                      required
+                    />
+
+                    <label for="ToDate">To: </label>
+                    <input
+                      type="date"
+                      id="ToDate"
+                      name="ToDate"
+                      required
+                    />
+                  </p>
+                  <p>
+                    <button id="UpdateAccButton" type="submit">Submit</button>
+                  </p>
+                </form>
+                <table>
+                      <thead>
+                      <tr>
+                        <th>Injury Case ID</th>
+                        <th>Ride ID</th>
+                        <th>Date</th>
+                        <th>Severity Scale</th>
+                        <th>Amount of Injured cases</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {InjuryCaseData.map((injury_case) => (
+                        <tr key={injury_case.id}>
+                        <td>{injury_case.InjuryCaseID}</td>
+                        <td>{injury_case.RideID}</td>
+                        <td>{injury_case.Date}</td>
+                        <td>{injury_case.SeverityScale}</td>
+                        <td>{injury_case.AmountInjured}</td>
+                        </tr>
+                      ))}
+                      </tbody>
+                </table>
+                <h2>Injury Cases Report</h2>
+                <p>This report shows records of how many injury cases does a ride have weekly!
+                  <br></br>
+                  And
+                  <br></br> How many times does a ride do breakdown weekly!
+                </p>
+                <form id="UpdateAccPas"  method="get" action="/submit">
+                  <p>
+                    <label for="FromDate">From: </label>
+                    <input
+                      type="date"
+                      id="FromDate"
+                      name="FromDate"
+                      required
+                    />
+
+                    <label for="ToDate">To: </label>
+                    <input
+                      type="date"
+                      id="ToDate"
+                      name="ToDate"
+                      required
+                    />
+                  </p>
+                  <p>
+                    <button id="UpdateAccButton" type="submit">Submit</button>
+                  </p>
+                </form>
+                <table>
+                      <thead>
+                      <tr>
+                        <th>Ride</th>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Week</th>
+                        <th>Average Injured cases</th>
+                        <th>Total Breakdown Rides</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {InjuryReportData.map((injury) => (
+                        <tr key={injury.id}>
+                        <td>{injury.RideName}</td>
+                        <td>{injury.Year}</td>
+                        <td>{injury.Month}</td>
+                        <td>{injury.Week}</td>
+                        <td>{injury.AvgInjured}</td>
+                        <td>{injury.Breakdowns}</td>
+                        </tr>
+                      ))}
+                      </tbody>
+                </table>
+
+                <h2>New Injury Case</h2>
+                <form id="UpdateAccPas" onSubmit={handlenewinjury}  method="post" action="/submit">
+                  <p>
+                    <label for="RideID">Ride ID: </label>
+                    <input type="text" id="RideID" name="RideID" min={8} max={8} required />
+
+                    <label for="Date">Date: </label>
+                    <input type="date" id="Date" name="Date" required />
+
+                    <label for="SeverityScale">Severity Scale: </label>
+                    <input type="int" id="SeverityScale" name="SeverityScale" required />
+
+                    <label for="AmountInjured">From: </label>
+                    <input type="int" id="AmountInjured" name="AmountInjured" required />
+                  </p>
+                  <p>
+                    <button id="UpdateAccButton" type="submit">Submit</button>
+                  </p>
+                </form>
+                 </div>
+              </div>
             </div>
                   
                 <br></br>
@@ -1977,13 +2157,6 @@ else{
 
               </div>
             </div>
-
-
-
-            
-        
-
-
   );
 }
 }
