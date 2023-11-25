@@ -15,6 +15,11 @@
 
 #signout *{
   color: white;
+  font-family: 'Mitr', serif;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: -5px;
 }
 
 .nav-item {
@@ -120,18 +125,18 @@
   width: 168px;
 }
 
-.InjuryReport{
+.HazardRep {
   color: #000000;
   font-size: 20px;
   left: 15px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: 290px;
+  top: 380px;
   width: 168px;
 }
 
-.HazardRep {
+.AddRide{
   color: #000000;
   font-size: 20px;
   left: 15px;
@@ -142,13 +147,17 @@
   width: 168px;
 }
 
-.UpdateAccPasSection{
-  height: 100px;
-  left: 0px;
+.UpdateRide{
+  color: #000000;
+  font-size: 20px;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
   position: absolute;
-  top: 100;
-  width: 90vw;
+  top: 310px;
+  width: 168px;
 }
+
 
 button {
   background-color: rgba(255, 255, 255, 0);
@@ -157,6 +166,12 @@ button {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
+}
+
+.zoneridebutton{
+  border: 1px solid black;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .optiontextbox {
@@ -207,3 +222,4 @@ input{
 #UpdateAccButton:hover{
   background-color: #580808;
 }
+
