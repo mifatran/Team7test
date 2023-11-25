@@ -515,22 +515,22 @@ const handledateissuelog = async (event) => {
   }
 };
 
-useEffect(() => {
+/*useEffect(() => {
   handledateissuelog();
-}, []);
+}, []);*/
 
 
 const navigate = useNavigate();
 
 const signOut = () => {
   localStorage.removeItem("authenticatedM");
-  localStorage.removeItem("nameM");
+  localStorage.removeItem("idM");
   navigate("/"); //Navigate back to main page
 };
 
 function GetEmpObj() {
   for (const obj of StaffData) {
-    if (obj.first_name === localStorage.getItem("nameM")) {
+    if (obj.employee_id === localStorage.getItem("idM")) {
       return (
           <div key={obj.employee_id}>
             <h3>
@@ -568,6 +568,39 @@ function GetEmpObj() {
   }
 }
 
+function GetEmpID() {
+  for (const obj of StaffData) {
+    if (obj.employee_id == localStorage.getItem("idM")) {
+      return (
+        <h3>Employee ID: {obj.employee_id}</h3>
+      );
+    }
+  }
+}
+
+function GetEmpWage() {
+  for (const obj of StaffData) {
+    if (obj.employee_id == localStorage.getItem("idM")) {
+      return (
+        <tr key={obj.employee_id}>
+        <td>{obj.hourly_pay}</td>
+        <td>{obj.salary}</td>
+        </tr>
+      );
+    }
+  }
+}
+
+function ReturnEmployeeName() {
+  for (const obj of StaffData) {
+    if(obj.employee_id == localStorage.getItem("idM")) {
+      return (
+        <div>Welcome back, {obj.first_name}!</div>
+      );
+    }
+  }
+}
+
 
 if (localStorage.getItem("authenticatedM") === false || localStorage.getItem("authenticatedM") == null) {
   console.log("Unsuccessful login");
@@ -588,7 +621,7 @@ else{
       </ul>
       {StaffData.map((employee) => (
         <div className="welcome-back-employee" key={employee.id}>
-          Welcome back, {localStorage.getItem("nameM")}!
+          <ReturnEmployeeName />
         </div>
         ))}
         <div className="visitortype">
