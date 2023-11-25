@@ -284,13 +284,17 @@ const server = http.createServer(async (req, res) => {
 
 
      const userInfotest = await sql.query("\
-     select customer.first_name, customer.last_name, customer.user_pass, customer.user_tag, customer.phone_number, customer.email,customer.payment_method,customer.home_address FROM customer \
+     select customer.customer_id, customer.first_name, customer.last_name, customer.user_pass, customer.user_tag, customer.phone_number, customer.email,customer.payment_method,customer.home_address FROM customer \
    ");
+
+    const userTicketsInfo = await sql.query("\
+    select * from tickets ");
 
      const responseData = {
       RideData: result.recordset,
       InactiveRides: resultTest.recordset,
       userInfo: userInfotest.recordset,
+      TicketInfo: userTicketsInfo.recordset
     };
 
 
@@ -317,35 +321,77 @@ const server = http.createServer(async (req, res) => {
     try {
       await sql.connect(config);
 
-      const { TicketsTypes, Amount, FirstName, LastName, Address, CardInfo } = JSON.parse(body);
+      const { TicketsTypes, Amount, FirstName, LastName, Address, CardInfo, customer_id } = JSON.parse(body);
 
-      const calcPrice = (TicketsTypes, Amount) => {
-        let Price = 0;
+      const calcPrices = (TicketsTypes) => {
+        let Prices = 0;
 
         switch(TicketsTypes){
           case 'DayPass':
-            Price = Amount * 33;
+            Prices = 33;
           break;
           case 'SeasonalPass':
-            Price = Amount * 61;
+            Prices = 61;
           break;
           case 'AnnualPass':
-            Price = Amount * 151;
+            Prices = 151;
           break;
           case 'PremiumPass':
-            Price = Amount * 351;
+            Prices = 351;
           break;
         }
-        return Price;
+        return Prices;
       }
-      const Price = calcPrice(TicketsTypes, Amount);
+      const Prices = calcPrices(TicketsTypes);
+
+      const calcTotal = (TicketsTypes, Amount) => {
+        let Total = 0;
+
+        switch(TicketsTypes){
+          case 'DayPass':
+            Total = Amount * 33;
+          break;
+          case 'SeasonalPass':
+            Total = Amount * 61;
+          break;
+          case 'AnnualPass':
+            Total = Amount * 151;
+          break;
+          case 'PremiumPass':
+            Total = Amount * 351;
+          break;
+        }
+        return Total;
+      }
+      const Total = calcTotal(TicketsTypes, Amount);
+
+      const calcBenefits = (TicketsTypes) => {
+        let Benefits = "None"; 
+        
+        switch(TicketsTypes){
+          case 'DayPass':
+            Benefits = "Ride Photos or Souvenirs";
+          break;
+          case 'SeasonalPass':
+            Benefits = "Special Shows or Entertainment";
+          break;
+          case 'AnnualPass':
+            Benefits = "Discounts on Merchandise & Dining plan";
+          break;
+          case 'PremiumPass':
+            Benefits = "Fast Pass";
+          break;
+        }
+        return Benefits;
+      }
+      const Benefits = calcBenefits(TicketsTypes);
 
       await sql.query(`
-        INSERT INTO PurchasedTickets(TicketID, Date, TicketType, Cardnum, Firstname, LastName, Amount, Address, Price)
+        INSERT INTO tickets(Ticket_id, CustomerID, Date, TicketType, Benefits, Prices, Amount, Total, first_name, last_name, Address, CardNum)
         VALUES
-        (CONCAT('Tick', SUBSTRING(CONVERT(VARCHAR(255), NEWID()), 1, 4)),
+        (CONCAT('Tick', SUBSTRING(CONVERT(VARCHAR(255), NEWID()), 1, 4)), '${customer_id}',
         GETDATE(),
-        '${TicketsTypes}', ${CardInfo}, '${FirstName}', '${LastName}', ${Amount}, '${Address}', ${Price});
+         '${TicketsTypes}', '${Benefits}', ${Prices}, ${Amount}, ${Total}, '${FirstName}', '${LastName}', '${Address}', '${CardInfo}');
       `);
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -374,20 +420,30 @@ const server = http.createServer(async (req, res) => {
         const {firstName, lastName, Username, Password, Email } = JSON.parse(body);
 
 
-        await sql.query(`
-          DELETE FROM customer
+       const result = await sql.query(`
+          Select * from customer
           WHERE
           first_name = '${firstName}' AND
           last_name = '${lastName}' AND
           user_tag = '${Username}' AND
           user_pass = '${Password}' AND
           email = '${Email}'
-
-          
         `);
 
+        const userInfoBeforeDeletion = result.recordset[0];
+
+        await sql.query(`
+        delete from customer
+        WHERE
+        first_name = '${firstName}' AND
+        last_name = '${lastName}' AND
+        user_tag = '${Username}' AND
+        user_pass = '${Password}' AND
+        email = '${Email}'
+      `);
+
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, message: 'Account Delete Successful' }));
+        res.end(JSON.stringify({ success: true, message: 'Account Delete Successful', userInfoBeforeDeletion}));
       } catch (error) {
         console.error('Error processing account deletion:', error.message);
         res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -410,7 +466,7 @@ const server = http.createServer(async (req, res) => {
       try {
         await sql.connect(config);
 
-        const {CurrentUsername, firstName, lastName, Username, Password, Email, Address, Payment } = JSON.parse(body);
+        const {CurrentUsername, firstName, lastName, Username, Password, Email, PhoneNum, Address, Payment } = JSON.parse(body);
 
         await sql.query(`
           UPDATE customer
@@ -421,6 +477,7 @@ const server = http.createServer(async (req, res) => {
           user_tag = '${Username}',
           user_pass = '${Password}',
           email = '${Email}',
+          phone_number = '${PhoneNum}',
           home_address = '${Address}',
           payment_method = '${Payment}'
 
@@ -440,7 +497,34 @@ const server = http.createServer(async (req, res) => {
       }
 
   });
+}
+    //VisitorPage, inbox
+    else if (req.url === '/api/inbox' && req.method === 'GET') {
+      try {
 
+        await sql.connect(config);
+
+
+        const result = await sql.query("\
+        SELECT * from Inbox \
+      ");
+
+      const responseData = {
+        InboxData: result.recordset,
+
+      };
+
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(responseData));
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+      } finally {
+    
+        //await sql.close();
+      }
 }
    else if (req.url === '/api/issuelog' && req.method === 'GET') {
     try {

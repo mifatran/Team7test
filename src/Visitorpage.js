@@ -9,9 +9,11 @@ function Visitorpage() {
     setVisibleSection(section);
   };
 
+  const [userInfoBeforeDeletion, setUserInfoBeforeDeletion] = useState(null);
   const[RideData, setRideData] = useState([]);
   const [InactiveRides, setInactiveRides] = useState([]);
   const [userInfo, setuserInfo] = useState([]);
+  const [TicketInfo, setTicket] = useState([]);
   useEffect(() => {
     
     fetch('/api/ride')
@@ -25,6 +27,23 @@ function Visitorpage() {
         setRideData(data.RideData);
         setInactiveRides(data.InactiveRides);
         setuserInfo(data.userInfo);
+        setTicket(data.TicketInfo);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  const [InboxData, setInbox] = useState([]);
+  useEffect(() => {
+    
+    fetch('/api/inbox')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setInbox(data.InboxData);
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
@@ -37,6 +56,9 @@ function Visitorpage() {
     const formData = new FormData(form);
   
     try {
+      const customer_id = userInfo.find(obj => obj.customer_id == localStorage.getItem("idV")).customer_id;
+      formData.append('customer_id', customer_id);
+
       const response = await fetch('/api/purchaseTicket', {
         method: 'POST',
         headers: {
@@ -80,12 +102,14 @@ function Visitorpage() {
       const result = await response.json();
       console.log(result); 
       form.reset();
-      localStorage.removeItem("authenticatedV");
-      window.location.href = '/SignIn';
+      setUserInfoBeforeDeletion(result.userInfoBeforeDeletion);
+
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+
+ 
 
   const AccountUpdate = async (event) => {
     event.preventDefault();
@@ -110,6 +134,7 @@ function Visitorpage() {
       console.log(result); 
       form.reset();
 
+      
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -117,15 +142,22 @@ function Visitorpage() {
 
   const navigate = useNavigate();
 
+  const AccDeleteOut = () =>{
+    localStorage.removeItem("authenticatedV");
+    localStorage.removeItem("idV");
+    navigate("/"); //Navigate back to main page
+  }
+
   const signOut = () => {
     localStorage.removeItem("authenticatedV");
-    localStorage.removeItem("nameV");
+    localStorage.removeItem("idV");
     navigate("/"); //Navigate back to main page
   };
 
   function GetVisitorObj() {
     for (const obj of userInfo) {
-      if (obj.first_name == localStorage.getItem("nameV")) {
+      if (obj.customer_id == localStorage.getItem("idV")) {
+        console.log("Successful data pull");
         return (
           <tr key={obj.customer_id}>
             <td>{obj.user_tag}</td>
@@ -137,6 +169,67 @@ function Visitorpage() {
             <td>{obj.home_address}</td>               
             <td>{obj.payment_method}</td>
           </tr>
+        );
+      }
+      else {
+        console.log("Failed data pull");
+      }
+    }
+  }
+
+
+  function GetInboxInfo() {
+
+    const customerID = localStorage.getItem("idV");
+    const InboxInfo = InboxData.filter((obj) => obj.Customer_ID === customerID);
+        if(InboxInfo.length === 0){
+          return (
+            
+              <h2> Your inbox is empty. No rewards have be sent your way yet. </h2>
+            
+          )
+        }
+
+        return InboxInfo.map((obj) => (
+          <tr key={obj.Inbox_id}>
+            <td>{new Date(obj.Date).toLocaleDateString('en-US')}</td>
+            <td>{obj.Subject}</td>
+            <td>{obj.Message}</td>
+            <td>{obj.Voucher_value}</td>
+          </tr>
+        ));
+
+  }
+  function GetTicketInfo() {
+
+    const customerID = localStorage.getItem("idV");
+    const userTicket = TicketInfo.filter((obj) => obj.CustomerID === customerID);
+
+        if(userTicket.length === 0){
+          return (
+            
+              <h2> You have not bought a ticket. </h2>
+            
+          )
+        }
+
+        return userTicket.map((obj) => (
+          <tr key={obj.tickets_id}>
+            <td>{new Date(obj.Date).toLocaleDateString('en-US')}</td>
+            <td>{obj.TicketType}</td>
+            <td>{obj.Amount}</td>
+            <td>{obj.Total}</td>
+          </tr>
+        ));
+
+  }
+  
+
+  function ReturnVisitorName() {
+    for (const obj of userInfo) {
+      if(obj.customer_id == localStorage.getItem("idV")) {
+        return (
+          <div>Welcome back, {obj.first_name}!</div>
         );
       }
     }
@@ -160,8 +253,9 @@ function Visitorpage() {
       </ul>
 
         <div className="welcome-back-visitor">
-          Welcome back, {localStorage.getItem("nameV")}!
+          <ReturnVisitorName />
         </div>
+ 
         
     
         <div className="group">
@@ -182,6 +276,9 @@ function Visitorpage() {
               </button>
               <button className="DeleteButton" onClick={() => showSection('section4')}>
               Delete Account
+              </button>
+              <button className="InboxButton" onClick={() => showSection('section5')}>
+              Inbox
               </button>
             
             </div>
@@ -205,12 +302,15 @@ function Visitorpage() {
                         <th>Payment Method </th>
                       </tr>
                     </thead>
-
                     <tbody>
                       <GetVisitorObj />
                     </tbody>
 
                   </table>
+
+
+
+                  
                   <p> Update the above information by inputing information below.
                   </p>
                   
@@ -255,6 +355,11 @@ function Visitorpage() {
                               </div>
 
                               <div>
+                              <label for="PhoneNum">Phone Number: </label>
+                              <input type="text" id="PhoneNum" name="PhoneNum" pattern="[0-9]{10}"/>
+                              </div>
+
+                              <div>
                               <label for="Address">Address: </label>
                               <input type="text" id="Address" name="Address"/>
                               </div>
@@ -266,7 +371,8 @@ function Visitorpage() {
                               <button id="UpdateAccInfoButton" type="submit">Submit</button>
                           
                       </form>
-
+                      <p> If you would like to see your updated information, refresh the page.
+                  </p>
                    </div>
                    
                   </div>
@@ -313,7 +419,7 @@ function Visitorpage() {
                                   <option value = "DayPass"> Day Pass </option>
                                   <option value = "SeasonalPass"> Seasonal Pass </option>
                                   <option value = "AnnualPass"> Annual Pass </option>
-                                  <option value = "Premium Pass"> Premium Pass </option>
+                                  <option value = "PremiumPass"> Premium Pass </option>
 
                               </select>
                         
@@ -349,7 +455,27 @@ function Visitorpage() {
                          
 
                       </form>
-              
+                  <div>
+
+                <h3>Purchase History</h3>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Ticket Type </th>
+                        <th>Amount </th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                    <GetTicketInfo />
+                    </tbody>
+                </table>
+
+                <p>To see your updated purchase history after buying a ticket, refresh the page.</p>
+
+                  </div>
                  </div>
               </div>
             </div>
@@ -409,11 +535,39 @@ function Visitorpage() {
 
               </div>
             </div>
+            <div style={{ display: visible === 'section5' ? 'block' : 'none' }}>
+              <div className="optiontextbox">
+                <h2>Welcome to your inbox!</h2>
+                <p>Below, you will see any rewards sent to your account.</p>
+                <p>Any rewards you may get from certain purchases will show here!</p>
+                <p>Special Note: If you purchase more than 10 tickets, you'll get a dining voucher!</p>
+                <br></br>
 
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Date </th>
+                        <th>Subject </th>
+                        <th>Message </th>
+                        <th>Value </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                    <GetInboxInfo />
+
+                    </tbody>
+                </table>
+                <br></br>
+
+              </div>
+            </div>
             <div style={{ display: visible === 'section4' ? 'block' : 'none' }}>
               <div className="optiontextbox">
                 <h2>Are you sure you want to delete your account?</h2>
                 <p> Deleting your account will mean that you'll know longer have access to it and your information will be deleted. Are you ok with that?</p>
+
+                <p> Completing the form below will ensure that this is your account and that you agree to deleting it.</p>
               <form id="AccountDelete" onSubmit={AccountDelete} method="post" action="/submit">
                               <div>
                               <label for="FirstName ">First Name:</label>
@@ -444,17 +598,25 @@ function Visitorpage() {
                       </form>
         
 
-              <div style={{ display: visible === 'section5' ? 'block' : 'none' }}>
-              <h2>Are you sure you want to delete your account?</h2>
-
+              {userInfoBeforeDeletion && (
+                <div>
+                  <h2>Account Deletion Successful</h2>
+                  <p>You have deleted the account with the below information </p>
+                 
+                  <p>Username: {userInfoBeforeDeletion.user_tag}</p>
+                  <p>First Name: {userInfoBeforeDeletion.first_name}</p>
+                  <p>Last Name: {userInfoBeforeDeletion.last_name}</p>
+                  
+                  <button id="AccDeleteSignout" onClick={AccDeleteOut} type="submit">Sign Out</button>
+                </div>
+              )}
               </div>
               </div>
             </div>
             </div>
 
 
-          </div>
-        
+    
 
 
   );
