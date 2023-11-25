@@ -2,251 +2,74 @@ import './MainPg.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"; 
 
-
 function MainPg() {
   const [visible, setVisibleSection] = useState('section1');
 
   const showSection = (section) => {
     setVisibleSection(section);
   }
-
+  const[Zone1Data, setZone1Data] = useState([]);
+  const[Zone2Data, setZone2Data] = useState([]);
+  const[Zone3Data, setZone3Data] = useState([]);
+  const[Zone4Data, setZone4Data] = useState([]);
   const[EventData, setEventData] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/event')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setEventData(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   const[TicketData, setTicketData] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/ticket')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setTicketData(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   const[Ride1Data, setRide1Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/ride1')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setRide1Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Stall1Data, setStall1Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/stall1')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setStall1Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Shop1Data, setShop1Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/shop1')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setShop1Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Service1Data, setService1Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/service1')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setService1Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   const[Ride2Data, setRide2Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/ride2')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setRide2Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Stall2Data, setStall2Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/stall2')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setStall2Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Shop2Data, setShop2Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/shop2')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setShop2Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Service2Data, setService2Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/service2')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setService2Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   const[Ride3Data, setRide3Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/ride3')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setRide3Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Stall3Data, setStall3Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/stall3')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setStall3Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Shop3Data, setShop3Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/shop3')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setShop3Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Service3Data, setService3Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/service3')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setService3Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   const[Ride4Data, setRide4Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/ride4')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setRide4Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Stall4Data, setStall4Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/stall4')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setStall4Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Shop4Data, setShop4Data] = useState([]);
-  useEffect(() => {
-    
-    fetch('/api/shop4')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setShop4Data(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
   const[Service4Data, setService4Data] = useState([]);
+  const[HelpDeskData, setHelpDeskData] = useState([]);
+  const[SecurityData, setSecurityData] = useState([]);
+  const[EmergencyData, setEmergencyData] = useState([]);
   useEffect(() => {
     
-    fetch('/api/service4')
+    fetch('/api/all')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
       })
-      .then((data) => setService4Data(data))
+      .then((data) => {
+        setEventData(data.EventData);
+        setTicketData(data.TicketData);
+        setZone1Data(data.Zone1Data);
+        setZone2Data(data.Zone2Data);
+        setZone3Data(data.Zone3Data);
+        setZone4Data(data.Zone4Data);
+        setRide1Data(data.Ride1Data);
+        setRide2Data(data.Ride2Data);
+        setRide3Data(data.Ride3Data);
+        setRide4Data(data.Ride4Data);
+        setStall1Data(data.Stall1Data);
+        setStall2Data(data.Stall2Data);
+        setStall3Data(data.Stall3Data);
+        setStall4Data(data.Stall4Data);
+        setShop1Data(data.Shop1Data);
+        setShop2Data(data.Shop2Data);
+        setShop3Data(data.Shop3Data);
+        setShop4Data(data.Shop4Data);
+        setService1Data(data.Service1Data);
+        setService2Data(data.Service2Data);
+        setService3Data(data.Service3Data);
+        setService4Data(data.Service4Data);
+        setHelpDeskData(data.HelpDeskData);
+        setSecurityData(data.SecurityData);
+        setEmergencyData(data.EmergencyData);
+        
+      })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
@@ -276,10 +99,10 @@ function MainPg() {
         <p className='park_info'>Park Information</p>
       </div>
 
-      <div className='event'>
-        <p className='events'><b>Events</b></p>
-        <p className='event_invt'>Come attend one of the upcoming Db Theme Park latest events!</p>
-        <p className='event_invt'>Admission payment at entrance of event location</p>
+      <div className='section'>
+        <p className='title'><b>Events</b></p>
+        <p className='info'>Come attend one of the upcoming Db Theme Park latest events!</p>
+        <p className='info'>Admission payment at entrance of event location</p>
       </div>
       <table  className='event_table'>
         <thead>
@@ -302,11 +125,11 @@ function MainPg() {
         </tbody>
       </table>
 
-      <div className='ticket'>
-        <p className='tickets'><b>Tickets</b></p>
-        <p className='ticket_info'>Want to visit DB Theme Park? Here are the ticket options and
+      <div className='section'>
+        <p className='title'><b>Tickets</b></p>
+        <p className='info'>Want to visit DB Theme Park? Here are the ticket options and
         their prices below!</p>
-        <p className='ticket_info'>Tickets are required to event the park.</p>
+        <p className='info'>Tickets are required to event the park.</p>
       </div>
       <table  className='ticket_table'>
         <thead>
@@ -325,21 +148,29 @@ function MainPg() {
         </tbody>
       </table>
       
-      <div className='theme_zone'>
-        <p className='theme_zones'><b>Theme Zones</b></p>
+      <div className='section'>
+        <p className='title'><b>Theme Zones</b></p>
         <div className="optionzone">
-              <button className="springzone" onClick={() => showSection('section1')}>
-                Blooming Meadows
+        {Zone1Data.map((theme_zone) => (
+              <button className="springzone" onClick={() => showSection('section1')} key={theme_zone.id}>
+                {theme_zone.Name}
               </button>
-              <button className="summerzone"onClick={() => showSection('section2')}>
-                Heatwave Heaven
+        ))}
+        {Zone2Data.map((theme_zone) => (
+              <button className="summerzone"onClick={() => showSection('section2')} key={theme_zone.id}>
+                {theme_zone.Name}
               </button>
-              <button className="fallzone"onClick={() => showSection('section3')}>
-                Crimson Corner
+        ))}
+        {Zone3Data.map((theme_zone) => (
+              <button className="fallzone"onClick={() => showSection('section3')} key={theme_zone.id}>
+                {theme_zone.Name}
               </button>
-              <button className="winterzone" onClick={() => showSection('section4')}>
-              Winter Wonderland
-              </button>  
+        ))}
+        {Zone4Data.map((theme_zone) => (
+              <button className="winterzone" onClick={() => showSection('section4')} key={theme_zone.id}>
+              {theme_zone.Name}
+              </button> 
+        ))} 
         </div>
 
         <div style={{ display: visible === 'section1' ? 'block' : 'none' }}>
@@ -649,9 +480,49 @@ function MainPg() {
       </table>
       </ul>
       </div>
-
+      
     </div>
-
+      <div className='section'>
+              <p className='title'><b>Help Desk</b></p>
+              {HelpDeskData.map((help_desk) => (
+              <p className='info' key={help_desk.id}>
+                Location: {help_desk.location}
+                <br></br>
+                <br></br>
+                Contact phone number: {help_desk.phone_num}
+                <br></br>
+                <br></br>
+                Email: {help_desk.email}
+              </p>
+              ))}
+              <p className='title'><b>Security Office</b></p>
+              {SecurityData.map((security) => (
+              <p className='info' key={security.id}>
+                Location: {security.booth_location}
+                <br></br>
+                <br></br>
+                Contact phone number: {security.phone_num}
+                <br></br>
+                <br></br>
+                Email: {security.email}
+                <br></br>
+                <br></br>
+                Rules: {security.Rules}
+              </p>
+              ))}
+              <p className='title'><b>Emergency Office</b></p>
+              {EmergencyData.map((emergency) => (
+              <p className='info' key={emergency.id}>
+                Location: {emergency.booth_location}
+                <br></br>
+                <br></br>
+                Contact phone number: {emergency.phone_num}
+                <br></br>
+                <br></br>
+                Email: {emergency.email}
+              </p>
+              ))}
+      </div>
     </div>
 
 );
