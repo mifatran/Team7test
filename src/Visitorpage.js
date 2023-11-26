@@ -74,7 +74,7 @@ function Visitorpage() {
       const result = await response.json();
       console.log(result); 
       form.reset();
-
+      window.location.reload();
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -103,7 +103,7 @@ function Visitorpage() {
       console.log(result); 
       form.reset();
       setUserInfoBeforeDeletion(result.userInfoBeforeDeletion);
-
+  
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -133,7 +133,7 @@ function Visitorpage() {
       const result = await response.json();
       console.log(result); 
       form.reset();
-
+      window.location.reload();
       
     } catch (error) {
       console.error('Error submitting form:', error);
