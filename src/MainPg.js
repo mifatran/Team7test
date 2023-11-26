@@ -117,7 +117,7 @@ function MainPg() {
           {EventData.map((special_events) => (
             <tr key={special_events.id}>
               <td>{special_events.Event_name}</td>
-              <td>{special_events.event_date}</td>
+              <td>{new Date(special_events.event_date).toLocaleDateString('en-US')}</td>
               <td>{special_events.event_details}</td>
               <td>{special_events.event_location}</td>
             </tr>
